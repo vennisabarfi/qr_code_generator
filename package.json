@@ -2,9 +2,8 @@
   "dependencies": {
     "axios": "^1.6.8",
     "express": "^4.19.2",
-    "http": "^0.0.1-security",
-    "nodemailer": "^6.9.13",
-    "png-js": "^1.0.0"
+    "http": "^0.0.1-security"
+ 
   },
   "scripts": {
     "start": "node server.js",
