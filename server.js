@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-// const request = require('request');
+var PNG = require('png-js');
 
 
 router.get('/qrcode/:text', async function(req,res,next){
@@ -15,9 +15,8 @@ router.get('/qrcode/:text', async function(req,res,next){
             res.send(response.data);
             console.log(response);
         
-       
     }catch(error){
-        console.log(error);
+        console.log(`Error: ${error}`);
         response.json({message: error});
     }
         
