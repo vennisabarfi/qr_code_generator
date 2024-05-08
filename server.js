@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-var PNG = require('png-js');
-// const http = require('http');
 
 
 router.get('/qrcode/:text', async function(req,res,next){
@@ -14,9 +12,10 @@ router.get('/qrcode/:text', async function(req,res,next){
 
     try{
         const response = await axios.get(qr_url,{
-            // res.setHeader('Content-type', 'image/png')
+           
             headers:{
                 'Accept': 'image/png'
+                
             },
             responseType: 'arraybuffer'
             });
@@ -28,12 +27,7 @@ router.get('/qrcode/:text', async function(req,res,next){
         console.log(`Error: ${error}`);
         res.status(500).json({message: `Error message: ${error}`});
     }
-        
-
-
     })
-
-
 
 
 module.exports = router;
