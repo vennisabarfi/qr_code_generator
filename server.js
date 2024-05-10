@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-
+const fs = require('fs');
+const path = require('path');
 
 router.get('/qrcode/:text', async function(req,res,next){
     const req_text = req.params.text; // receive text from user
@@ -19,15 +20,21 @@ router.get('/qrcode/:text', async function(req,res,next){
             },
             responseType: 'arraybuffer'
             });
-            res.setHeader('Content-Type', 'image/png')
-            res.send(response.data);
-            console.log(response);
+        res.setHeader('Content-Type', 'image/png')
+        res.send(response.data);
+        console.log(response);
+        //Send the QR code to a temporary file
+        const filepath = path.join(__dirname, 'temp', 'qrCode.png');
+        fs.writeFileSync(filepath, response.data);
+        //Send the QR code file as a response
+        // res.sendFile(qrCodeFilePath);
         
     }catch(error){
         console.log(`Error: ${error}`);
         res.status(500).json({message: `Error message: ${error}`});
     }
-    })
+  
+    });
 
 
 module.exports = router;
